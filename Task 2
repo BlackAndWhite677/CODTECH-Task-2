@@ -1,0 +1,81 @@
+###This Python program is a simple Student Grade Tracker application that allows users to manage student grades. The main functionalities of the program include adding students,
+assigning grades to students, viewing the average grade of a student, and exiting the application.
+
+class Student():
+    def __init__(self,name,grade=0):
+        self.name=name
+        self.grade=[]
+
+    def add_grade(self,grade):
+        if 0<=grade<=100:
+            self.grade.append(grade)
+            print(self.grade)
+        else:
+            print("Invalid grade. Enter valid grade")
+            
+    def average_grade(self):
+        if self.grade:
+            result=sum(self.grade)/len(self.grade)
+            print("Average grade:",result)
+
+    def view_details(self):
+        details= f"Name:{self.name}\nGrades:{self.grade}"
+        return (details)
+    
+
+def main():
+  students={}
+  while True:
+
+    print("Select a function to perform")
+    print("1.Add a student")
+    print("2.Add grades")
+    print("3.Average grade calculation")
+    print("4.View student details")
+    print("5.Exit Student Tracker")
+    func=input("Enter the number corresponding to the function to be performed")
+
+    if func=="1":
+        name=input("Enter a student name")
+
+        if name in students:
+            print("Name already in list")
+        else:
+            students[name]=Student(name)
+            print(f"Student {name} added in list")
+           
+    elif func=="2":
+        name=input("Enter a student name")
+        if name in students:
+           mark=float(input("enter grade"))
+           students[name].add_grade(mark)
+           print(f"Grade added to Student {name}")
+        else:
+            print("Student not found")
+            
+    elif func=="3":
+        name=input("Enter a student name")
+        if name in students:
+           students[name].average_grade()
+        else:
+            print("Student not found")
+
+    elif func=="4":
+        name=input("Enter a student name")
+        if name in students:
+            print(students[name].view_details())
+        else:
+            print("Student not found")
+            
+    elif func=="5":
+        print("Exiting Student Tracker")
+        break
+
+    else:
+        print("Invalid function. Try a different option")
+
+
+if __name__=="__main__":
+    main()
+
+
